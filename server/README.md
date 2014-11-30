@@ -1,7 +1,7 @@
 # WALKING-SKELETON
 * checkout branch `blank`
 * create package.json with `npm init`
-* install express and add it as dependecy to the project
+* install express and add it as dependency to the project
 * GET /hello should reply with "Hello World"
   * `curl "http://localhost:3000/hello"`
 * GET /hello?who="Gabriele" should reply with "Hello Gabriele"
@@ -81,6 +81,7 @@
 
 
 # SAMPLES
+
 ## Request to Create an Order
 ```
 POST /orders
