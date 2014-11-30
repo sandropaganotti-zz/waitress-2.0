@@ -1,4 +1,2 @@
-waitress-2.0
-============
-
-The new version of waitress
+# Waitress (2.0)
+An educational application done with NodeJS and AngularJS
