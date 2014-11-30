@@ -6,6 +6,10 @@
   "scripts": {
     "test": "grunt test"
   },
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:sandropaganotti/waitress-2.0.git"
+  },
   "keywords": [
     "remote",
     "storage",
