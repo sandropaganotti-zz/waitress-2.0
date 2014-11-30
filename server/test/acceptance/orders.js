@@ -1,3 +1,5 @@
+/* jshint expr:true */
+
 var helper = require('./../_helper'),
     app = require('./../../app'),
     Order = require('./../../models/order'),

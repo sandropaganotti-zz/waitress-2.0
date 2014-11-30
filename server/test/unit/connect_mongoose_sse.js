@@ -1,3 +1,5 @@
+/* jshint expr:true */
+
 var expect = require('chai').use(require('sinon-chai')).expect,
     sinon = require('sinon'),
     sse = require('./../../lib/connect-mongoose-sse');

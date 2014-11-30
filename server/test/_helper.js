@@ -1,8 +1,6 @@
 process.env.NODE_ENV = 'test';
 
 var http = require('http'),
-    mongoose = require('mongoose'),
-    request = require('request'),
     path = require('path'),
     _ = require('lodash');
 
