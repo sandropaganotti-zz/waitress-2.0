@@ -1,7 +1,7 @@
 {
-  "name": "waitress",
-  "version": "1.0.0",
-  "description": "",
+  "name": "waitress-2.0",
+  "version": "0.1.0",
+  "description": "An educational application for the MEAN (MongoDB Express AngularJS NodeJS) stack",
   "main": "server/app.js",
   "scripts": {
     "test": "grunt test"
@@ -12,7 +12,7 @@
     "mean",
     "stack"
   ],
-  "author": "Sandro Paganotti",
+  "author": "Sandro Paganotti and Gabriele Lana",
   "license": "MIT",
   "dependencies": {
     "express": "~3.4.4",
