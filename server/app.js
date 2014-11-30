@@ -1,6 +1,7 @@
 var express = require('express'),
     mongoose = require('mongoose'),
     app = module.exports = express(),
+    configure = require('./config/env'),
     sse = require('./lib/connect-mongoose-sse'),
     util = require('util'),
     async = require('async'),
@@ -11,21 +12,9 @@ var Dish = require('./models/dish'),
     Order = require('./models/order')
 
 var server = http.createServer(app),
-    primus = new Primus(server, { transformer: 'websockets' })
+    primus = new Primus(server, {transformer: 'websockets'})
 
-if (process.env.NODE_ENV === 'test') {
-  app.set('port', 9191)
-  app.set('db', 'mongodb://localhost/waitress-test')
-} else {
-  app.set('port', process.env.PORT || 3000)
-  app.set('db', process.env.MONGODB_URL || 'mongodb://localhost/waitress')
-}
-
-app.use(require('serve-favicon')(__dirname + '/public/favicon.ico'))
-app.use(require('morgan')('combined'));
-app.use(require('cors')())
-app.use(require('body-parser').json())
-app.use(require('body-parser').urlencoded({extended: false}))
+configure(app);
 
 app.get('/hello', function(req, res) {
   res.end(

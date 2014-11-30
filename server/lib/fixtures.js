@@ -1,7 +1,7 @@
 var fs = require('fs'),
-  path = require('path'),
-  async = require('async'),
-  _ = require('lodash')
+    path = require('path'),
+    async = require('async'),
+    _ = require('lodash')
 
 
 module.exports.load = function(db, callback, fixturePath) {
