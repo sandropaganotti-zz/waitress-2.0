@@ -13,22 +13,19 @@ var Dish = require('./models/dish'),
 var server = http.createServer(app),
     primus = new Primus(server, { transformer: 'websockets' })
 
-app.configure(function() {
-  app.set('port', process.env.PORT || 3000)
-  app.set('db', process.env.MONGODB_URL || 'mongodb://localhost/waitress')
-})
-
-app.configure('test', function() {
+if (process.env.NODE_ENV === 'test') {
   app.set('port', 9191)
   app.set('db', 'mongodb://localhost/waitress-test')
-})
+} else {
+  app.set('port', process.env.PORT || 3000)
+  app.set('db', process.env.MONGODB_URL || 'mongodb://localhost/waitress')
+}
 
-app.use(express.favicon())
-app.use(express.logger('dev'))
-app.use(express.json())
+app.use(require('serve-favicon')(__dirname + '/public/favicon.ico'))
+app.use(require('morgan')('combined'));
 app.use(require('cors')())
-
-mongoose.connect(app.get('db'))
+app.use(require('body-parser').json())
+app.use(require('body-parser').urlencoded({extended: false}))
 
 app.get('/hello', function(req, res) {
   res.end(
@@ -45,7 +42,7 @@ app.get('/dishes', function(req, res) {
 app.post('/orders', function(req, res) {
   Order.save(req.body, function(err, order) {
     res.location(util.format('/order/%s', order.id))
-    res.json(201, order)
+    res.status(201).json(order)
   })
 })
 
@@ -73,7 +70,7 @@ app.post('/orders/ready', function(req, res) {
       })
     },
     function(err, all) {
-      res.send(204)
+      res.status(204).send()
     }
   )
 })
@@ -89,7 +86,7 @@ Order.on('changed:ready', function(order) {
 })
 
 if (require.main === module) {
-  mongoose.connection.on('connected', function() {
+  mongoose.connect(app.get('db'), function() {
     require('./lib/fixtures').load(mongoose.connection.db, function() {
       server.listen(app.get('port'), function() {
         console.log('Waitress server is running on port %d', app.get('port'))

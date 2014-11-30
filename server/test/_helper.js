@@ -1,6 +1,7 @@
 process.env.NODE_ENV = 'test'
 
 var http = require('http'),
+    mongoose = require('mongoose'),
     request = require('request'),
     path = require('path'),
     _ = require('lodash')
@@ -16,10 +17,15 @@ module.exports.loadFixtures = function(app) {
 
 module.exports.startServer = function(app) {
   return function(done) {
-    this.server = http.createServer(app).listen(app.get('port'), done)
-    this.urlFor = function(path) {
-      return 'http://localhost:' + app.get('port') + path
-    }
+    var self = this,
+        mongoose = require('mongoose')
+
+    mongoose.connect(app.get('db'), function() {
+      self.server = http.createServer(app).listen(app.get('port'), done)
+      self.urlFor = function(path) {
+        return 'http://localhost:' + app.get('port') + path
+      }
+    })
   }
 }
 
