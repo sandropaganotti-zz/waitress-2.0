@@ -1,0 +1,40 @@
+@import "../bower_components/bootstrap-sass/lib/bootstrap";
+
+.main-title{
+    @extend .col-xs-12;
+}
+
+.order-chunk{
+    @extend .row;
+    margin-bottom: 30px;
+}
+
+.order{
+    @extend .col-xs-12;
+    @extend .col-sm-6;
+    @extend .col-md-3;
+    @media (min-width: $screen-sm-min) and (max-width: $screen-sm-max) {
+      &:nth-child(2n+1){
+        clear: left;
+      }
+    }
+    @media (min-width: $screen-md-min) {
+      &:nth-child(4n+1){
+        clear: left;
+      }
+    }
+}
+
+.dish-category{
+    text-transform: capitalize;
+}
+
+label{
+    display: block;
+}
+
+.dish-send{
+    @extend .btn;
+    @extend .btn-default;
+    @extend .btn-block;
+}

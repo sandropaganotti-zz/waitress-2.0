@@ -1,0 +1,36 @@
+<ion-header class="bar bar-header bar-dark">
+    <button class="button  button-clear" ng-click="navigateBack()">
+        <i class="icon ion-arrow-left-c"></i>
+    </button>
+    <h1 class="title">Conferma</h1>
+</ion-header>
+<ion-content class="has-header">
+    <div class="card">
+        <div class="item item-divider">
+            Riassunto ordine:
+        </div>
+        <div href="#" class="item" ng-repeat="dish in order.dishes">
+            {{dish.name}}, {{dish.portions}} porzioni
+        </div>
+
+    </div>
+
+    <div class="card">
+        <div class="item item-divider">
+            Informazioni aggiuntive:
+        </div>
+        <label class="item item-input">
+            <input type="number" placeholder="Numero Tavolo" ng-model="order.table">
+        </label>
+    </div>
+
+    <div class="card" ng-if="order.table">
+        <div class="item tabs tabs-secondary tabs-icon-left">
+            <a class="tab-item" ng-click="saveOrder()">
+                <i class="icon ion-archive"></i>
+                Invia l'ordinazione
+            </a>
+        </div>
+    </div>
+
+</ion-content>

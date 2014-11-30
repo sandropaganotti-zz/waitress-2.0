@@ -1,0 +1,20 @@
+<ion-header class="bar bar-header bar-dark">
+  <button class="button  button-clear" ng-click="navigateBack()">
+    <i class="icon ion-arrow-left-c"></i>
+  </button>
+  <h1 class="title">Dettaglio</h1>
+</ion-header>
+<ion-content class="has-header">
+
+  <div class="list">
+
+    <ion-radio  ng-repeat="(id,name) in items"
+                ng-value="id"
+                ng-model="portions"
+                ng-change="setPortions(id)">
+      {{name}}
+    </ion-radio>
+
+  </div>
+
+</ion-content>
