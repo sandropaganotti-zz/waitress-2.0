@@ -1,2 +1,2 @@
 # Waitress (2.0)
-An educational application done with NodeJS and AngularJS
+An educational application for the MEAN (MongoDB Express AngularJS NodeJS) stack
