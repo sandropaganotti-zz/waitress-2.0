@@ -2,9 +2,9 @@
 <html>
     <head>
         <title>Kitchen</title>
-        <!-- build:css({.tmp,app}) css/kitchen.css -->
+        <!-- build:css css/kitchen.css -->
         <link rel="stylesheet" href="css/kitchen.css">
-        <!-- endbuild -->
+        <!-- /build -->
     </head>
     <body ng-app="kitchenApp">
 
@@ -33,17 +33,12 @@
             </div>
         </div>
 
-        <!-- build:js scripts/kitchen-vendor.js -->
-        <!-- bower:js -->
+        <!-- build:js scripts/kitchen.js -->
         <script src="bower_components/jquery/dist/jquery.js"></script>
         <script src="bower_components/bootstrap-sass/dist/js/bootstrap.js"></script>
         <script src="bower_components/underscore/underscore.js"></script>
-        <!-- endbower -->
         <script src="bower_components/angular/angular.js"></script>
-        <!-- endbuild -->
-
-        <!-- build:js({.tmp,app}) scripts/kitchen-scripts.js -->
         <script src="scripts/kitchen.js"></script>
-        <!-- endbuild -->
+        <!-- /build -->
     </body>
 </html>

@@ -85,7 +85,8 @@ module.exports = function(grunt){
       },
       dist: {
         files: {
-          'client-dist/app.css': 'client/scss/app.scss'
+          'client-dist/css/app.css': 'client/scss/main.scss',
+          'client-dist/css/kitchen.css': 'client/scss/kitchen.scss'
         },
         options: {
           style: 'compressed'
@@ -97,11 +98,35 @@ module.exports = function(grunt){
       dist: {
         files: {
           'tmp/client/app.js': [
-            'client/js/app.js',
-            'client/js/resources/*.js',
-            'client/js/directives/*.js',
-            'client/js/controllers/*.js'
+            'client/scripts/app.js',
+            'client/scripts/services/*.js',
+            'client/scripts/directives/*.js',
+            'client/scripts/controllers/*.js'
+          ],
+          'tmp/client/kitchen.js': [
+            'client/scripts/kitchen.js'
           ]
+        }
+      }
+    },
+
+    ngtemplates:  {
+      dist: {
+        cwd: 'client/',
+        src: 'views/**.html',
+        dest: 'tmp/client/template.js',
+        options: {
+          module: 'waitressApp',
+          htmlmin: {
+            collapseBooleanAttributes:      true,
+            collapseWhitespace:             true,
+            removeAttributeQuotes:          true,
+            removeComments:                 true,
+            removeEmptyAttributes:          true,
+            removeRedundantAttributes:      true,
+            removeScriptTypeAttributes:     true,
+            removeStyleLinkTypeAttributes:  true
+          }
         }
       }
     },
@@ -109,10 +134,27 @@ module.exports = function(grunt){
     uglify: {
       dist: {
         files: {
-          'client-dist/app.js': [
-            'client/components/angular/angular.js',
-            'client/components/angular-resource/angular-resource.js',
-            'tmp/client/app.js'
+          'client-dist/scripts/vendor.js': [
+            'client/bower_components/ionic/release/js/ionic.js',
+            'client/bower_components/angular/angular.js',
+            'client/bower_components/angular-animate/angular-animate.js',
+            'client/bower_components/angular-sanitize/angular-sanitize.js',
+            'client/bower_components/angular-ui-router/release/angular-ui-router.js',
+            'client/bower_components/ionic/release/js/ionic-angular.js',
+            'client/bower_components/angular-resource/angular-resource.js',
+            'client/bower_components/angular-route/angular-route.js',
+            'client/scripts/vendor/primus.js'
+          ],
+          'client-dist/scripts/main.js': [
+            'tmp/client/app.js',
+            'tmp/client/template.js'
+          ],
+          'client-dist/scripts/kitchen.js': [
+            'client/bower_components/jquery/dist/jquery.js',
+            'client/bower_components/bootstrap-sass/dist/js/bootstrap.js',
+            'client/bower_components/underscore/underscore.js',
+            'client/bower_components/angular/angular.js',
+            'tmp/client/kitchen.js'
           ]
         }
       }
@@ -121,7 +163,8 @@ module.exports = function(grunt){
     processhtml: {
       dist: {
         files: {
-          'client-dist/index.html': ['client/index.html']
+          'client-dist/index.html': ['client/index.html'],
+          'client-dist/kitchen.html': ['client/kitchen.html']
         }
       }
     }
@@ -129,6 +172,6 @@ module.exports = function(grunt){
   });
 
   grunt.registerTask('default',['concurrent']);
-  grunt.registerTask('build',['ngAnnotate','uglify','sass:dist','processhtml']);
+  grunt.registerTask('build',['sass:dist', 'ngAnnotate', 'ngtemplates', 'uglify', 'processhtml' ]);
 
 }
