@@ -2,7 +2,6 @@ var express = require('express'),
     mongoose = require('mongoose'),
     app = module.exports = express(),
     configure = require('./config/env'),
-    sse = require('./lib/connect-mongoose-sse'),
     util = require('util'),
     async = require('async'),
     http = require('http'),
@@ -35,7 +34,7 @@ app.post('/orders', function(req, res) {
   });
 });
 
-app.get('/orders', sse(Order), function(req, res) {
+app.get('/orders', function(req, res) {
   Order.find(function(err, orders) {
     res.json(orders);
   });

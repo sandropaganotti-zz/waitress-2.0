@@ -58,7 +58,7 @@ describe('HTTP /orders resource', function() {
       });
     });
 
-    describe('with header Accept: test/event-stream', function() {
+    xdescribe('with header Accept: test/event-stream', function() {
       describe('when header Last-Event-Id is 0', function() {
         it('returns a server sent event with all orders', function(done) {
           var self = this,

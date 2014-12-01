@@ -5,11 +5,11 @@ var expect = require('chai').use(require('sinon-chai')).expect,
     sse = require('./../../lib/connect-mongoose-sse');
 
 describe('connect-mongoose-sse', function() {
-  it('is a function', function() {
+  xit('is a function', function() {
     expect(sse).to.be.a('function');
   });
 
-  it('is a function that returns a function', function() {
+  xit('is a function that returns a function', function() {
     expect(sse()).to.be.a('function');
   });
 
@@ -22,7 +22,7 @@ describe('connect-mongoose-sse', function() {
       this.next = sinon.spy();
     });
 
-    it('will call next', function() {
+    xit('will call next', function() {
       sse()(this.req, this.res, this.next);
 
       expect(this.next).to.have.been.calledOnce;
@@ -48,14 +48,14 @@ describe('connect-mongoose-sse', function() {
       };
     });
 
-    it('will call createdBetween on Model', function() {
+    xit('will call createdBetween on Model', function() {
       sse(this.model)(this.req, this.res, this.next);
 
       expect(this.model.createdBetween).to.have.been.calledOnce;
       expect(this.next).to.not.have.been.called;
     });
 
-    it('will set required headers', function() {
+    xit('will set required headers', function() {
       sse(this.model)(this.req, this.res, this.next);
 
       expect(this.res.writeHead).to.have.been.calledWith(200, {
@@ -66,7 +66,7 @@ describe('connect-mongoose-sse', function() {
     });
 
     context('and have Last-Event-ID header', function() {
-      it('will call createdBetween on Model with Last-Event-ID value', function() {
+      xit('will call createdBetween on Model with Last-Event-ID value', function() {
         this.req.headers['last-event-id'] = '1';
 
         sse(this.model)(this.req, this.res, this.next);
@@ -76,7 +76,7 @@ describe('connect-mongoose-sse', function() {
     });
 
     context('when Model.createdBetween returns nothing', function() {
-      it('will write nothing', function() {
+      xit('will write nothing', function() {
         sse(this.model)(this.req, this.res, this.next);
 
         expect(this.res.write).to.not.have.been.called;
@@ -84,7 +84,7 @@ describe('connect-mongoose-sse', function() {
     });
 
     context('when Model.createdBetween returns some documents', function() {
-      it('will write the event', function() {
+      xit('will write the event', function() {
         var documents = [{id: 1}, {id: 2}, {id: 3}];
 
         this.model.createdBetween = sinon.spy(function(from, to, callback) {
@@ -107,7 +107,7 @@ describe('connect-mongoose-sse', function() {
     });
 
     context('when Model.createdBetween returns an error', function() {
-      it('will reply with 500', function() {
+      xit('will reply with 500', function() {
         this.model.createdBetween = sinon.spy(function(from, to, callback) {
           callback('unknown-error');
         });
